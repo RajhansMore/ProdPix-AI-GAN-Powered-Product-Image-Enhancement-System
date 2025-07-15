@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Image Generator & Enhancer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f3f6fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #4a90e2;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-box {
+            border: 2px dashed #ccc;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        .upload-box input[type="file"] {
+            margin: 20px 0;
+        }
+
+        .btn {
+            padding: 10px 25px;
+            background-color: #4a90e2;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            position: relative;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #357ac8;
+        }
+
+        .btn.loading {
+            pointer-events: none;
+            background-color: #357ac8;
+        }
+
+        .btn.loading::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 3px solid white;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .images {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .images img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            max-height: 350px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #4a90e2;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .alert {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        function showLoading() {
+            const btn = document.getElementById('enhance-btn');
+            btn.classList.add('loading');
+            btn.innerText = 'Enhancing...';
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>🛍️ Product Image Generator & Enhancer</h1>
+    <p>Using GANs for High-Resolution Product Visuals</p>
+</header>
+
+<div class="container">
+    <div class="upload-box">
+        <h2>Upload Your Product Image</h2>
+        <form action="/upload" method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
+            <input type="file" name="image" accept="image/*" required>
+            <br>
+            <button type="submit" class="btn" id="enhance-btn">Enhance Image</button>
+        </form>
+    </div>
+
+    {% if output_path %}
+        <div class="images">
+            <div>
+                <h3 class="section-title">🖼️ Enhanced Product Image</h3>
+                <img src="{{ output_path }}" alt="Enhanced Image">
+                <br><br>
+                <a href="{{ output_path }}" download class="btn">Download Enhanced Image</a>
+            </div>
+        </div>
+    {% elif output_path is none %}
+        <div class="alert">
+            The enhanced image is not available yet. Please try uploading a new image.
+        </div>
+    {% endif %}
+</div>
+
+<footer>
+    Built with ❤️· © 2025 ProdPix
+</footer>
+
+</body>
+</html>
