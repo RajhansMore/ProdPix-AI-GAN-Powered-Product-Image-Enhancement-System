@@ -1,0 +1,16 @@
+# requirements.txt — initial dependency list for ProdPix
+# For GPU-enabled PyTorch builds, install torch separately following https://pytorch.org/
+
+torch
+torchvision
+numpy
+Pillow
+opencv-python
+scikit-image
+matplotlib
+tqdm
+albumentations
+einops
+pyyaml
+requests
+tensorboard
