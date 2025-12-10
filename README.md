@@ -49,12 +49,4 @@ Files added in this change:
    The `requirements.txt` includes `torch` as a placeholder. For GPU support, install torch using the official selector at:
    https://pytorch.org/get-started/locally/
 
-## Recommendations
 
-- Add `.venv/` to `.gitignore` (included here) to avoid committing environment files.
-- Pin package versions in `requirements.txt` once the project's dependencies stabilise to ensure reproducible installs.
-
-## Next steps I can take for you
-- Push these files to the branch `setup/venv-and-docs`.
-- Create a PR from that branch into your default branch.
-- Pin package versions by scanning the repository for imports and suggesting appropriate versions.
